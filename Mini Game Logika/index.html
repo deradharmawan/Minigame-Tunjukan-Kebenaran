@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Game: Logika Proposisi</title>
+    <!-- Menghubungkan ke file style.css -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- SCREEN: MENU UTAMA -->
+        <div id="start-screen" class="card">
+            <h1>Tantangan Logika</h1>
+            <p class="subtitle">Kuasai Tabel Kebenaran dengan Cepat!</p>
+            
+            <div style="margin-bottom: 2rem;">
+                <p>Tentukan Nilai Kebenaran (Benar/Salah) dari proposisi yang muncul sebelum waktu habis.</p>
+            </div>
+
+            <button id="btn-start" class="btn btn-primary">Mulai Game</button>
+            <br><br>
+            <button id="btn-cheat" class="btn btn-outline">Pelajari Materi (Cheat Sheet)</button>
+        </div>
+
+        <!-- SCREEN: GAMEPLAY -->
+        <div id="game-screen" class="card hidden">
+            <div class="game-header">
+                <span id="score-display">Skor: 0</span>
+                <span id="level-display">Level: 1</span>
+            </div>
+
+            <div class="timer-bar-container">
+                <div id="timer-bar" class="timer-bar"></div>
+            </div>
+
+            <div class="question-box">
+                <div class="variables" id="var-values">p = B, q = S</div>
+                <div class="expression" id="expression-display">p ∧ q</div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+                <button id="btn-true" class="btn choice-btn btn-true">BENAR (B)</button>
+                <button id="btn-false" class="btn choice-btn btn-false">SALAH (S)</button>
+            </div>
+        </div>
+
+        <!-- SCREEN: GAME OVER -->
+        <div id="game-over-screen" class="card hidden">
+            <h1 style="color: var(--danger)">Waktu Habis!</h1>
+            <p class="subtitle">Permainan Berakhir</p>
+            
+            <h2 id="final-score" style="margin: 2rem 0; font-size: 3rem;">0</h2>
+            
+            <button id="btn-replay" class="btn btn-primary">Main Lagi</button>
+            <br><br>
+            <button id="btn-menu" class="btn btn-outline">Kembali ke Menu</button>
+        </div>
+    </div>
+
+    <!-- MODAL: CHEAT SHEET -->
+    <div id="cheat-sheet" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Referensi Tabel Kebenaran</h2>
+                <button id="btn-close-cheat" class="btn btn-danger" style="padding: 5px 10px; background: #ef4444; color: white;">X</button>
+            </div>
+            
+            <p style="margin-top: 10px; font-size: 0.9rem;">B = Benar (True), S = Salah (False)</p>
+
+            <h3>1. Konjungsi (DAN / AND) - <span class="operator-icon">∧</span></h3>
+            <p>Bernilai B hanya jika <strong>keduanya B</strong>.</p>
+            <table>
+                <tr><th>p</th><th>q</th><th>p ∧ q</th></tr>
+                <tr><td>B</td><td>B</td><td>B</td></tr>
+                <tr><td>B</td><td>S</td><td>S</td></tr>
+                <tr><td>S</td><td>B</td><td>S</td></tr>
+                <tr><td>S</td><td>S</td><td>S</td></tr>
+            </table>
+
+            <br>
+            <h3>2. Disjungsi (ATAU / OR) - <span class="operator-icon">∨</span></h3>
+            <p>Bernilai B jika <strong>salah satu atau keduanya B</strong>.</p>
+            <table>
+                <tr><th>p</th><th>q</th><th>p ∨ q</th></tr>
+                <tr><td>B</td><td>B</td><td>B</td></tr>
+                <tr><td>B</td><td>S</td><td>B</td></tr>
+                <tr><td>S</td><td>B</td><td>B</td></tr>
+                <tr><td>S</td><td>S</td><td>S</td></tr>
+            </table>
+
+            <br>
+            <h3>3. Implikasi (JIKA..MAKA) - <span class="operator-icon">→</span></h3>
+            <p>Bernilai S hanya jika <strong>awal B, akhir S</strong> (B → S = S).</p>
+            <table>
+                <tr><th>p</th><th>q</th><th>p → q</th></tr>
+                <tr><td>B</td><td>B</td><td>B</td></tr>
+                <tr><td>B</td><td>S</td><td>S</td></tr>
+                <tr><td>S</td><td>B</td><td>B</td></tr>
+                <tr><td>S</td><td>S</td><td>B</td></tr>
+            </table>
+
+            <br>
+            <h3>4. Bi-implikasi (JIKA DAN HANYA JIKA) - <span class="operator-icon">↔</span></h3>
+            <p>Bernilai B jika <strong>keduanya sama</strong> (sama-sama B atau sama-sama S).</p>
+            <table>
+                <tr><th>p</th><th>q</th><th>p ↔ q</th></tr>
+                <tr><td>B</td><td>B</td><td>B</td></tr>
+                <tr><td>B</td><td>S</td><td>S</td></tr>
+                <tr><td>S</td><td>B</td><td>S</td></tr>
+                <tr><td>S</td><td>S</td><td>B</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Menghubungkan ke file script.js -->
+    <script src="script.js"></script>
+</body>
+</html>
